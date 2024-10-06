@@ -91,17 +91,17 @@ export default function HeroList() {
       <hr />
 
       {/* Heroes List */}
-      <Card isFooterBlurred radius="lg" className="grid grid-cols-7 gap-2 mt-5">
+      <Card isFooterBlurred radius="lg" className="grid grid-cols-6 gap-2 mt-5">
         {heroes.map((hero) => (
           <div key={hero.heroid} className="relative">
             <Image
               src={hero.key}
               alt={hero.name}
-              height={200}
-              width={200}
+              height={300}
+              width={300}
               className="object-cover rounded-lg"
             />
-            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 border border-white/20 text-white/80 font-bold rounded-b-lg p-1">
+            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/90 via-black/75 to-transparent border-black/20 text-white font-bold rounded-b-lg px-2 pt-10 text-lg justify-center">
               {hero.name}
             </CardFooter>
           </div>
