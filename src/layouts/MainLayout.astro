@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import "@styles/global.css";
 
 export const metadata = {
@@ -41,6 +42,7 @@ export const metadata = {
         <meta name="twitter:image" content={metadata.urlimg} />
         <meta name="twitter:creator" content={metadata.creator} />
         <meta name="twitter:site" content={metadata.url} />
+        <ViewTransitions />
       </head>
 	<body>
 		<slot />
