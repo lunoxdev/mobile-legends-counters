@@ -5,6 +5,7 @@ export default function HeroList() {
   const [roles, setRoles] = useState([]);
   const [heroes, setHeroes] = useState([]);
   const [selectedRoleId, setSelectedRoleId] = useState(1);
+  const [activeRoleId, setActiveRoleId] = useState(1);
 
   // Fetch roles
   useEffect(() => {
@@ -57,37 +58,50 @@ export default function HeroList() {
   }, [selectedRoleId]);
 
   return (
-    <section className="my-4">
+    <section className="w-full my-5">
       {/* Bar */}
-      <nav className="flex justify-center items-center gap-2 mb-4">
+      <nav className="flex justify-center items-center gap-2 mb-5">
         <Button
-          onClick={() => setSelectedRoleId(1)}
-          className="hover:bg-white/20 rounded-sm px-2 py-[1.5px]"
+          onClick={() => {
+            setSelectedRoleId(1);
+            setActiveRoleId(1);
+          }}
+          className={`hover:bg-blue-500 rounded-md px-5 py-2 ${
+            activeRoleId === 1 ? "bg-blue-500" : ""
+          }`}
         >
           ALL
         </Button>
         {roles.map((role) => (
           <Button
             key={role.id}
-            onClick={() => setSelectedRoleId(role.label)}
-            className="hover:bg-white/20 rounded-sm px-2 py-[1.5px]"
+            onClick={() => {
+              setSelectedRoleId(role.label);
+              setActiveRoleId(role.label);
+            }}
+            className={`hover:bg-blue-500 rounded-md px-5 py-2 ${
+              activeRoleId === role.label ? "bg-blue-500" : ""
+            }`}
           >
-            {role.label ? role.label : setSelectedRoleId(1)}
+            {role.label}
           </Button>
         ))}
       </nav>
+
       <hr />
+
+      {/* Heroes List */}
       <Card isFooterBlurred radius="lg" className="grid grid-cols-7 gap-2 mt-5">
         {heroes.map((hero) => (
           <div key={hero.heroid} className="relative">
             <Image
               src={hero.key}
               alt={hero.name}
-              height={100}
-              width={100}
+              height={200}
+              width={200}
               className="object-cover rounded-lg"
             />
-            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 border border-white/20 text-white/80 rounded-b-lg px-1">
+            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 border border-white/20 text-white/80 font-bold rounded-b-lg p-1">
               {hero.name}
             </CardFooter>
           </div>
