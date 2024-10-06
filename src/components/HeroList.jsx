@@ -91,11 +91,11 @@ export default function HeroList() {
       <hr />
 
       {/* Heroes List */}
-      <Card isFooterBlurred radius="lg" className="grid grid-cols-8 gap-3 mt-5">
+      <Card isFooterBlurred radius="lg" className="grid grid-cols-8 gap-2 mt-5">
         {heroes.map((hero) => (
           <div
             key={hero.heroid}
-            className="relative overflow-hidden rounded-lg border-none hover:shadow-lg hover:shadow-blue-500 my-3"
+            className="relative overflow-hidden rounded-lg border-none hover:shadow-md hover:shadow-blue-500 my-1"
           >
             <Image
               src={hero.key}
