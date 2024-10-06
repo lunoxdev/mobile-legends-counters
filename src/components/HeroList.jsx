@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 
 export default function HeroList() {
   const [roles, setRoles] = useState([]);
@@ -56,17 +57,42 @@ export default function HeroList() {
   }, [selectedRoleId]);
 
   return (
-    <section>
-      <h2>Roles</h2>
-      {roles.map((role) => (
-        <button key={role.id} onClick={() => setSelectedRoleId(role.label)}>
-          {role.label}
-        </button>
-      ))}
-      <h2>Héroes</h2>
-      {heroes.map((hero) => (
-        <div key={hero.id}>{hero.name}</div>
-      ))}
+    <section className="my-4">
+      {/* Bar */}
+      <nav className="flex justify-center items-center gap-2 mb-4">
+        <Button
+          onClick={() => setSelectedRoleId(1)}
+          className="hover:bg-white/20 rounded-sm px-2 py-[1.5px]"
+        >
+          ALL
+        </Button>
+        {roles.map((role) => (
+          <Button
+            key={role.id}
+            onClick={() => setSelectedRoleId(role.label)}
+            className="hover:bg-white/20 rounded-sm px-2 py-[1.5px]"
+          >
+            {role.label ? role.label : setSelectedRoleId(1)}
+          </Button>
+        ))}
+      </nav>
+      <hr />
+      <Card isFooterBlurred radius="lg" className="grid grid-cols-7 gap-2 mt-5">
+        {heroes.map((hero) => (
+          <div key={hero.heroid} className="relative">
+            <Image
+              src={hero.key}
+              alt={hero.name}
+              height={100}
+              width={100}
+              className="object-cover rounded-lg"
+            />
+            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 border border-white/20 text-white/80 rounded-b-lg px-1">
+              {hero.name}
+            </CardFooter>
+          </div>
+        ))}
+      </Card>
     </section>
   );
 }

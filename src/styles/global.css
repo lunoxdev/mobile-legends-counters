@@ -4,3 +4,9 @@ body {
 
   @apply bg-[#121212] text-white;
 }
+
+h1 {
+  @apply text-5xl font-bold;
+}
+
+
