@@ -100,11 +100,11 @@ export default function HeroList() {
             <Image
               src={hero.key}
               alt={hero.name}
-              height={200}
+              height={220}
               width={200}
               className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
             />
-            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/90 via-black/75 to-transparent font-bold px-2 pt-10 text-lg justify-center">
+            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-blue-900/80 via-blue-950/40 to-transparent font-bold px-2 pt-14 text-lg justify-center">
               {hero.name}
             </CardFooter>
           </div>
