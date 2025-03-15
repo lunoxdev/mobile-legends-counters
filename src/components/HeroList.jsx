@@ -66,7 +66,7 @@ export default function HeroList() {
         {heroes.map((hero) => (
           <div
             key={hero.heroid}
-            className="relative overflow-hidden h-auto rounded-lg hover:shadow-md hover:shadow-blue-500"
+            className="relative overflow-hidden h-auto rounded-lg hover:shadow-md hover:shadow-[#98FFFF]"
           >
             <Image
               src={hero.key}
@@ -75,7 +75,7 @@ export default function HeroList() {
               width={160}
               className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
             />
-            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#292E52] via-[#292E52]/70 to-transparent px-2 pt-10 text-sm justify-center">
+            <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#292E52] via-[#292E52]/70 to-transparent px-2 pb-1 pt-10 text-sm justify-center">
               {hero.name}
             </CardFooter>
           </div>
