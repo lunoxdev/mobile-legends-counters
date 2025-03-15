@@ -62,7 +62,7 @@ export default function HeroList() {
         ))}
       </nav>
 
-      <Card className="grid grid-cols-7 lg:grid-cols-10 h-auto gap-3 py-4">
+      <Card className="grid grid-cols-6 lg:grid-cols-9 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
         {heroes.map((hero) => (
           <div
             key={hero.heroid}
@@ -72,7 +72,7 @@ export default function HeroList() {
               src={hero.key}
               alt={hero.name}
               height={170}
-              width={160}
+              width={170}
               className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
             />
             <CardFooter className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#292E52] via-[#292E52]/70 to-transparent px-2 pb-1 pt-10 text-sm justify-center">
