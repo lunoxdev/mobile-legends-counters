@@ -53,7 +53,7 @@ export default function HeroList() {
   };
 
   return (
-    <section className="w-full px-2">
+    <section className="w-full">
       <nav className="flex shrink-0">
         {roles.map((role) => (
           <button

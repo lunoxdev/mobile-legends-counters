@@ -37,46 +37,79 @@ export default function HeroDetails({ selectedHeroId }) {
       <div className="flex flex-row h-auto w-full mx-auto">
         <img
           src={hero.cover_picture}
-          alt={`Cover image of ${hero.name}`}
-          className="w-80 h-[200px] object-cover mr-4"
+          alt={`Cover image of ${hero.name || "N/A"}`}
+          className="w-1/3 h-[200px] object-cover mr-4"
         />
-        <header>
-          <h2 className="text-3xl font-bold">{hero.name}</h2>
-          <p className="text-[#7890B3]">{hero.type}</p>
-          <ul className="flex w-full gap-4 mt-3">
+
+        <div className="flex flex-col w-full">
+          <h2 className="text-3xl font-bold">{hero.name || "N/A"}</h2>
+          <p className="text-[#7890B3]">{hero.type || "N/A"}</p>
+          <ul className="flex w-full gap-4 mt-4">
             <li>
-              🪄 Magic: <strong>{hero.mag}</strong>
+              ⚔️ Physical: <strong>{hero.phy || "N/A"}</strong>
             </li>
             <li>
-              ⚔️ Physical: <strong>{hero.phy}</strong>
+              🪄 Magic: <strong>{hero.mag || "N/A"}</strong>
             </li>
             <li>
-              ❤️ Life: <strong>{hero.alive}</strong>
+              ❤️ Life: <strong>{hero.alive || "N/A"}</strong>
             </li>
             <li>
-              🧠 Difficulty: <strong>{hero.diff}</strong>
+              🧠 Difficulty: <strong>{hero.diff || "N/A"}</strong>
             </li>
           </ul>
-        </header>
+
+          <div className="flex w-full h-full justify-between items-end">
+            <div className="flex w-full h-auto items-center">
+              <img
+                src={hero.counters.best.icon || "N/A"}
+                alt={`Hero Counter Image ${hero.counters.best.name || "N/A"}`}
+                width={70}
+                height={70}
+                className="rounded-full"
+              />
+              <div className="flex flex-col ml-4">
+                <p className="text-sm text-[#7890B3]">Ideal Combo</p>
+                <p>{hero.counters.best.name || "N/A"}</p>
+              </div>
+            </div>
+            <div className="flex w-full h-auto items-center">
+              <img
+                src={hero.counters.counters.icon || "N/A"}
+                alt={`Hero Counter Image ${
+                  hero.counters.counters.name || "N/A"
+                }`}
+                width={70}
+                height={70}
+                className="rounded-full"
+              />
+              <div className="flex flex-col ml-4">
+                <p className="text-sm text-[#7890B3]">Counter</p>
+                <p>{hero.counters.counters.name || "N/A"}</p>
+              </div>
+            </div>
+            <div className="flex w-full h-auto items-center">
+              <img
+                src={hero.counters.countered.icon || "N/A"}
+                alt={`Hero Counter Image ${
+                  hero.counters.countered.name || "N/A"
+                }`}
+                width={70}
+                height={70}
+                className="rounded-full"
+              />
+              <div className="flex flex-col ml-4">
+                <p className="text-sm text-[#7890B3]">Countered</p>
+                <p>{hero.counters.countered.name || "N/A"}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* <div className="">content</div> */}
 
       {/* <section className="mt-4">
-          <h3>Estadísticas</h3>
-          <dl>
-            <dt>Magia:</dt>
-            <dd>{hero.mag}</dd>
-            <dt>Físico:</dt>
-            <dd>{hero.phy}</dd>
-            <dt>Vida:</dt>
-            <dd>{hero.alive}</dd>
-            <dt>Dificultad:</dt>
-            <dd>{hero.diff}</dd>
-          </dl>
-        </section>
-
-        <section className="mt-4">
           <h3>Habilidades</h3>
           <ul>
             {hero.skill.skill.map((skill) => (
