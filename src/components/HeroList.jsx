@@ -72,12 +72,7 @@ export default function HeroList() {
 
       {/* Hero Details */}
       {selectedHeroId ? (
-        <HeroDetails
-          selectedHeroId={selectedHeroId}
-          selectedHeroImage={
-            heroes.find((hero) => hero.heroid === selectedHeroId)?.key
-          }
-        />
+        <HeroDetails selectedHeroId={selectedHeroId} />
       ) : (
         <div className="grid grid-cols-6 lg:grid-cols-9 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
           {heroes.map((hero) => (
