@@ -65,7 +65,7 @@ export default function HeroDetails({ selectedHeroId }) {
             </li>
           </ul>
 
-          <div className="flex w-full lg:w-1/2 h-full justify-between items-end">
+          <div className="flex w-full lg:w-2/3 h-full justify-between items-end">
             <div className="flex w-full h-auto items-center">
               <img
                 src={hero.counters.best.icon || "N/A"}
@@ -139,6 +139,10 @@ export default function HeroDetails({ selectedHeroId }) {
             </div>
           </div>
         ))}
+        <span className="text-[#7890B3] p-4">
+          <strong className="text-sm text-[#f2f2f2]">Tips: </strong>
+          {stripHTML(hero.skill.item.tips)}
+        </span>
       </div>
 
       {/* Gear */}
@@ -166,6 +170,10 @@ export default function HeroDetails({ selectedHeroId }) {
             </div>
           </div>
         ))}
+        <span className="text-[#7890B3] p-4">
+          <strong className="text-sm text-[#f2f2f2]">Tips: </strong>
+          {stripHTML(hero.gear.out_pack_tips)}
+        </span>
       </div>
     </article>
   );
