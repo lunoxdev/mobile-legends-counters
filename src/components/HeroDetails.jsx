@@ -44,7 +44,7 @@ export default function HeroDetails({ selectedHeroId }) {
         <img
           src={hero.cover_picture}
           alt={`Cover image of ${hero.name || "N/A"}`}
-          className="w-1/3 h-[200px] object-cover mr-4"
+          className="w-1/2 lg:w-1/2 h-[180px] lg:h-[230px] object-cover mr-4"
         />
 
         <div className="flex flex-col w-full">
@@ -65,7 +65,7 @@ export default function HeroDetails({ selectedHeroId }) {
             </li>
           </ul>
 
-          <div className="flex w-full h-full justify-between items-end">
+          <div className="flex w-full lg:w-1/2 h-full justify-between items-end">
             <div className="flex w-full h-auto items-center">
               <img
                 src={hero.counters.best.icon || "N/A"}
@@ -114,7 +114,7 @@ export default function HeroDetails({ selectedHeroId }) {
       </div>
 
       {/* Skills */}
-      <div className="flex flex-col w-full h-auto mt-4 mb-20">
+      <div className="flex flex-col w-full h-auto my-4">
         <h3 className="text-2xl font-bold">Skills</h3>
         {hero.skill.skill.map((skill) => (
           <div
@@ -141,29 +141,32 @@ export default function HeroDetails({ selectedHeroId }) {
         ))}
       </div>
 
-      {/* <section className="mt-4">
-        <h3>Equipamiento</h3>
-        <ul>
-          {hero.gear.out_pack.map((item) => (
-            <li key={item.equipment_id}>
-              <h4>{item.equip.name}</h4>
-              <Image
+      {/* Gear */}
+      <div className="flex flex-col w-full h-auto mt-4 mb-20">
+        <h3 className="text-2xl font-bold">Gears</h3>
+        {hero.gear.out_pack.map((item) => (
+          <div
+            key={item.equipment_id}
+            className="flex flex-row items-center justify-between w-full h-full gap-0 mt-2"
+          >
+            <div className="flex w-20 h-auto justify-center items-center mx-auto">
+              <img
                 src={item.equip.icon}
                 alt={`Icono de ${item.equip.name}`}
                 width={50}
                 height={50}
               />
-              <p>{item.equip.des.join(" ")}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="mt-4">
-        <h3>Contadores</h3>
-        <p>Mejor compañero: {hero.counters.best.name || "N/A"}</p>
-        <p>Contrarresta a: {hero.counters.counters.name || "N/A"}</p>
-        <p>Contrarrestado por: {hero.counters.countered.name || "N/A"}</p>
-      </section> */}
+            </div>
+            <div className="flex flex-col w-full p-2">
+              <h4 className="text-lg font-bold">{item.equip.name}</h4>
+              <p className="text-sm text-[#7890B3]">
+                {/* Aplicamos stripHTML aquí */}
+                {stripHTML(item.equip.des.join(" "))}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </article>
   );
 }
