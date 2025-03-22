@@ -116,6 +116,19 @@ export default function HeroDetails({ selectedHeroId }) {
       {/* Skills */}
       <div className="flex flex-col w-full h-auto my-4">
         <h3 className="text-2xl font-bold">Skills</h3>
+        <div className="flex flex-row w-full items-center space-x-4 p-2">
+          <img
+            src={hero.skill.item.battle_second.icon}
+            width={50}
+            height={50}
+            className="flex w-14"
+          />
+          <p>
+            <strong className="text-lg font-bold text-[#d3eb3b]">
+              Recomended!
+            </strong>
+          </p>
+        </div>
         {hero.skill.skill.map((skill) => (
           <div
             key={skill.name}
@@ -139,6 +152,7 @@ export default function HeroDetails({ selectedHeroId }) {
             </div>
           </div>
         ))}
+
         <span className="text-[#7890B3] p-4">
           <strong className="text-sm text-[#f2f2f2]">Tips: </strong>
           {stripHTML(hero.skill.item.tips)}
