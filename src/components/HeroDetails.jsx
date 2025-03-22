@@ -164,7 +164,7 @@ export default function HeroDetails({ selectedHeroId }) {
       </div>
 
       {/* Gear */}
-      <div className="flex flex-col w-full h-auto mt-4 mb-20">
+      <div className="flex flex-col w-full h-auto mt-4">
         <h3 className="text-2xl font-bold">Gears</h3>
         {hero.gear.out_pack.map((item) => (
           <div
