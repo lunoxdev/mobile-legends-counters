@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+// Función para eliminar etiquetas HTML
+function stripHTML(input) {
+  var doc = new DOMParser().parseFromString(input, "text/html");
+  return doc.body.textContent || "";
+}
+
 export default function HeroDetails({ selectedHeroId }) {
   const [hero, setHero] = useState(null);
 
@@ -107,50 +113,57 @@ export default function HeroDetails({ selectedHeroId }) {
         </div>
       </div>
 
-      {/* <div className="">content</div> */}
+      {/* Skills */}
+      <div className="flex flex-col w-full h-auto mt-4 mb-20">
+        <h3 className="text-2xl font-bold">Skills</h3>
+        {hero.skill.skill.map((skill) => (
+          <div
+            key={skill.name}
+            className="flex flex-row items-center justify-between w-full h-full gap-0 mt-2"
+          >
+            <div className="flex w-20 h-auto justify-center items-center mx-auto">
+              <img
+                src={skill.icon}
+                alt={`Icono de ${skill.name}`}
+                width={50}
+                height={50}
+                className="flex w-14"
+              />
+            </div>
+            <div className="flex flex-col w-full p-2">
+              <h4 className="text-lg font-bold">{skill.name}</h4>
+              <p className="text-sm text-[#7890B3]">
+                {/* Aplicamos stripHTML aquí */}
+                {stripHTML(skill.des)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* <section className="mt-4">
-          <h3>Habilidades</h3>
-          <ul>
-            {hero.skill.skill.map((skill) => (
-              <li key={skill.name}>
-                <h4>{skill.name}</h4>
-                <Image
-                  src={skill.icon}
-                  alt={`Icono de ${skill.name}`}
-                  width={50}
-                  height={50}
-                />
-                <p>{skill.des}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mt-4">
-          <h3>Equipamiento</h3>
-          <ul>
-            {hero.gear.out_pack.map((item) => (
-              <li key={item.equipment_id}>
-                <h4>{item.equip.name}</h4>
-                <Image
-                  src={item.equip.icon}
-                  alt={`Icono de ${item.equip.name}`}
-                  width={50}
-                  height={50}
-                />
-                <p>{item.equip.des.join(" ")}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mt-4">
-          <h3>Contadores</h3>
-          <p>Mejor compañero: {hero.counters.best.name || "N/A"}</p>
-          <p>Contrarresta a: {hero.counters.counters.name || "N/A"}</p>
-          <p>Contrarrestado por: {hero.counters.countered.name || "N/A"}</p>
-        </section> */}
+        <h3>Equipamiento</h3>
+        <ul>
+          {hero.gear.out_pack.map((item) => (
+            <li key={item.equipment_id}>
+              <h4>{item.equip.name}</h4>
+              <Image
+                src={item.equip.icon}
+                alt={`Icono de ${item.equip.name}`}
+                width={50}
+                height={50}
+              />
+              <p>{item.equip.des.join(" ")}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="mt-4">
+        <h3>Contadores</h3>
+        <p>Mejor compañero: {hero.counters.best.name || "N/A"}</p>
+        <p>Contrarresta a: {hero.counters.counters.name || "N/A"}</p>
+        <p>Contrarrestado por: {hero.counters.countered.name || "N/A"}</p>
+      </section> */}
     </article>
   );
 }
