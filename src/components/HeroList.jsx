@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import HeroDetails from "./HeroDetails";
 
+import toast, { Toaster } from "react-hot-toast";
+
 export default function HeroList() {
   const [heroes, setHeroes] = useState([]);
   const [selectedRoleId, setSelectedRoleId] = useState(1);
@@ -20,6 +22,20 @@ export default function HeroList() {
   useEffect(() => {
     const fetchHeroes = async () => {
       if (!selectedRoleId) return;
+
+      // Show the toast with the "x" button to close
+      toast(
+        "Unfortunately, we don't manage the data, so it may not display sometimes.",
+        {
+          duration: 2000,
+          style: {
+            borderRadius: "10px",
+            background: "#383f6f",
+            color: "#f2f2f2",
+            textSizeAdjust: "80%",
+          },
+        }
+      );
 
       const url = `https://unofficial-mobile-legends.p.rapidapi.com/roles/${selectedRoleId}`;
       const options = {
@@ -54,6 +70,7 @@ export default function HeroList() {
 
   return (
     <section className="w-full">
+      <Toaster position="top-right" reverseOrder={false} />
       <nav className="flex shrink-0">
         {roles.map((role) => (
           <button
