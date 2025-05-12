@@ -94,7 +94,7 @@ export default function HeroList() {
         <HeroDetails selectedHeroId={selectedHeroId} />
       ) : (
         <div className="grid grid-cols-6 lg:grid-cols-9 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
-          {heroes.map((hero, index) => (
+          {heroes.slice().reverse().map((hero, index) => (
             <motion.div
               key={hero.heroid}
               className="relative overflow-hidden h-auto rounded-lg hover:shadow-md hover:shadow-[#98FFFF]"

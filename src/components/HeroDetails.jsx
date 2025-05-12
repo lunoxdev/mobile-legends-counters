@@ -56,7 +56,8 @@ export default function HeroDetails({ selectedHeroId }) {
             <li>🧠 Difficulty: <strong>{hero.diff || "N/A"}</strong></li>
           </ul>
 
-          <div className="flex w-full lg:w-2/3 h-full justify-between items-end flex-wrap">
+          <div className="flex w-full lg:w-2/3 h-full justify-between items-end">
+            <div className="flex w-full h-auto items-center">
             {hero.counters?.best && (
               <div className="flex w-full h-auto items-center">
                 <img
@@ -102,6 +103,7 @@ export default function HeroDetails({ selectedHeroId }) {
                 </div>
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>
