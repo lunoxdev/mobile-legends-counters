@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import { type HeroDetails } from "../types";
 
+interface Props {
+  selectedHeroId: string;
+}
+
+// Remove HTML tags from a string received from the API
 function stripHTML(input) {
   var doc = new DOMParser().parseFromString(input, "text/html");
   return doc.body.textContent || "";
 }
 
-export default function HeroDetails({ selectedHeroId }) {
+export default function HeroDetails({ selectedHeroId }: Props) {
   const [hero, setHero] = useState(null);
 
   useEffect(() => {
@@ -50,59 +56,73 @@ export default function HeroDetails({ selectedHeroId }) {
           <h2 className="text-3xl font-bold">{hero.name || "N/A"}</h2>
           <p className="text-[#7890B3]">{hero.type || "N/A"}</p>
           <ul className="flex w-full gap-4 mt-4">
-            <li>⚔️ Physical: <strong>{hero.phy || "N/A"}</strong></li>
-            <li>🪄 Magic: <strong>{hero.mag || "N/A"}</strong></li>
-            <li>❤️ Life: <strong>{hero.alive || "N/A"}</strong></li>
-            <li>🧠 Difficulty: <strong>{hero.diff || "N/A"}</strong></li>
+            <li>
+              ⚔️ Physical: <strong>{hero.phy || "N/A"}</strong>
+            </li>
+            <li>
+              🪄 Magic: <strong>{hero.mag || "N/A"}</strong>
+            </li>
+            <li>
+              ❤️ Life: <strong>{hero.alive || "N/A"}</strong>
+            </li>
+            <li>
+              🧠 Difficulty: <strong>{hero.diff || "N/A"}</strong>
+            </li>
           </ul>
 
           <div className="flex w-full lg:w-2/3 h-full justify-between items-end">
             <div className="flex w-full h-auto items-center">
-            {hero.counters?.best && (
-              <div className="flex w-full h-auto items-center">
-                <img
-                  src={hero.counters.best.icon}
-                  alt={`Hero Counter Image ${hero.counters.best.name || "N/A"}`}
-                  width={70}
-                  height={70}
-                  className="rounded-full"
-                />
-                <div className="flex flex-col ml-4">
-                  <p className="text-sm text-[#7890B3]">Ideal Combo</p>
-                  <p>{hero.counters.best.name || "N/A"}</p>
+              {hero.counters?.best && (
+                <div className="flex w-full h-auto items-center">
+                  <img
+                    src={hero.counters.best.icon}
+                    alt={`Hero Counter Image ${
+                      hero.counters.best.name || "N/A"
+                    }`}
+                    width={70}
+                    height={70}
+                    className="rounded-full"
+                  />
+                  <div className="flex flex-col ml-4">
+                    <p className="text-sm text-[#7890B3]">Ideal Combo</p>
+                    <p>{hero.counters.best.name || "N/A"}</p>
+                  </div>
                 </div>
-              </div>
-            )}
-            {hero.counters?.counters && (
-              <div className="flex w-full h-auto items-center">
-                <img
-                  src={hero.counters.counters.icon}
-                  alt={`Hero Counter Image ${hero.counters.counters.name || "N/A"}`}
-                  width={70}
-                  height={70}
-                  className="rounded-full"
-                />
-                <div className="flex flex-col ml-4">
-                  <p className="text-sm text-[#7890B3]">Counter</p>
-                  <p>{hero.counters.counters.name || "N/A"}</p>
+              )}
+              {hero.counters?.counters && (
+                <div className="flex w-full h-auto items-center">
+                  <img
+                    src={hero.counters.counters.icon}
+                    alt={`Hero Counter Image ${
+                      hero.counters.counters.name || "N/A"
+                    }`}
+                    width={70}
+                    height={70}
+                    className="rounded-full"
+                  />
+                  <div className="flex flex-col ml-4">
+                    <p className="text-sm text-[#7890B3]">Counter</p>
+                    <p>{hero.counters.counters.name || "N/A"}</p>
+                  </div>
                 </div>
-              </div>
-            )}
-            {hero.counters?.countered && (
-              <div className="flex w-full h-auto items-center">
-                <img
-                  src={hero.counters.countered.icon}
-                  alt={`Hero Counter Image ${hero.counters.countered.name || "N/A"}`}
-                  width={70}
-                  height={70}
-                  className="rounded-full"
-                />
-                <div className="flex flex-col ml-4">
-                  <p className="text-sm text-[#7890B3]">Countered</p>
-                  <p>{hero.counters.countered.name || "N/A"}</p>
+              )}
+              {hero.counters?.countered && (
+                <div className="flex w-full h-auto items-center">
+                  <img
+                    src={hero.counters.countered.icon}
+                    alt={`Hero Counter Image ${
+                      hero.counters.countered.name || "N/A"
+                    }`}
+                    width={70}
+                    height={70}
+                    className="rounded-full"
+                  />
+                  <div className="flex flex-col ml-4">
+                    <p className="text-sm text-[#7890B3]">Countered</p>
+                    <p>{hero.counters.countered.name || "N/A"}</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             </div>
           </div>
         </div>
@@ -111,7 +131,7 @@ export default function HeroDetails({ selectedHeroId }) {
       {/* Skills */}
       <div className="flex flex-col w-full h-auto my-4">
         <h3 className="text-2xl font-bold">Skills</h3>
-        {hero.skill?.skill?.map((skill) => (
+        {hero.skill?.skill?.map((skill) =>
           skill?.icon && skill?.name ? (
             <div
               key={skill.name}
@@ -132,7 +152,7 @@ export default function HeroDetails({ selectedHeroId }) {
               </div>
             </div>
           ) : null
-        ))}
+        )}
 
         {hero.skill?.item?.tips && (
           <span className="text-[#7890B3] p-4">
@@ -152,7 +172,9 @@ export default function HeroDetails({ selectedHeroId }) {
                 className="flex w-14"
               />
               <p>
-                <strong className="text-lg font-bold text-[#d3eb3b]">Recomended!</strong>
+                <strong className="text-lg font-bold text-[#d3eb3b]">
+                  Recomended!
+                </strong>
               </p>
             </div>
           </div>
@@ -162,7 +184,7 @@ export default function HeroDetails({ selectedHeroId }) {
       {/* Gear */}
       <div className="flex flex-col w-full h-auto mt-4 mb-20">
         <h3 className="text-2xl font-bold">Gears</h3>
-        {hero.gear?.out_pack?.map((item) => (
+        {hero.gear?.out_pack?.map((item) =>
           item?.equip?.icon && item?.equip?.name ? (
             <div
               key={item.equipment_id}
@@ -179,12 +201,14 @@ export default function HeroDetails({ selectedHeroId }) {
               <div className="flex flex-col w-full p-2">
                 <h4 className="text-lg font-bold">{item.equip.name}</h4>
                 <p className="text-sm text-[#7890B3]">
-                  {item.equip.des ? stripHTML(item.equip.des.join(" ")) : "No description"}
+                  {item.equip.des
+                    ? stripHTML(item.equip.des.join(" "))
+                    : "No description"}
                 </p>
               </div>
             </div>
           ) : null
-        ))}
+        )}
         {hero.gear?.out_pack_tips && (
           <span className="text-[#7890B3] p-4">
             <strong className="text-sm text-[#f2f2f2]">Tips: </strong>
