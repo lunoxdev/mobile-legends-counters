@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import HeroDetails from "./HeroDetails";
-
 import toast, { Toaster } from "react-hot-toast";
-
 import { motion } from "motion/react";
+import { type Hero, type HeroApiResponse } from "../types";
 
 export default function HeroList() {
-  const [heroes, setHeroes] = useState([]);
-  const [selectedRoleId, setSelectedRoleId] = useState(1);
-  const [activeRoleId, setActiveRoleId] = useState(1);
-  const [selectedHeroId, setSelectedHeroId] = useState(null);
+  const [heroes, setHeroes] = useState<Hero[]>([]);
+  const [selectedRoleId, setSelectedRoleId] = useState<string>("ALL");
+  const [activeRoleId, setActiveRoleId] = useState<string>("ALL");
+  const [selectedHeroId, setSelectedHeroId] = useState<string>(null);
 
   const roles = [
-    { id: 1, name: "ALL" },
+    { id: "ALL", name: "ALL" },
     { id: "Tank", name: "Tank" },
     { id: "Fighter", name: "Fighter" },
     { id: "Assassin", name: "Assassin" },
@@ -25,7 +24,6 @@ export default function HeroList() {
     const fetchHeroes = async () => {
       if (!selectedRoleId) return;
 
-      // Show the toast with the "x" button to close
       toast(
         "Unfortunately, we don't manage the data, so it may not display sometimes.",
         {
@@ -39,7 +37,11 @@ export default function HeroList() {
         }
       );
 
-      const url = `https://unofficial-mobile-legends.p.rapidapi.com/roles/${selectedRoleId}`;
+      const url =
+        selectedRoleId === "ALL"
+          ? "https://unofficial-mobile-legends.p.rapidapi.com/heroes"
+          : `https://unofficial-mobile-legends.p.rapidapi.com/roles/${selectedRoleId}`;
+
       const options = {
         method: "GET",
         headers: {
@@ -50,7 +52,7 @@ export default function HeroList() {
 
       try {
         const response = await fetch(url, options);
-        const data = await response.json();
+        const data: HeroApiResponse = await response.json();
         setHeroes(data.data || []);
       } catch (error) {
         console.error(error);
@@ -60,13 +62,13 @@ export default function HeroList() {
     fetchHeroes();
   }, [selectedRoleId]);
 
-  const handleRoleClick = (roleId) => {
+  const handleRoleClick = (roleId: string) => {
     setSelectedRoleId(roleId);
     setActiveRoleId(roleId);
     setSelectedHeroId(null);
   };
 
-  const handleHeroClick = (heroId) => {
+  const handleHeroClick = (heroId: string) => {
     setSelectedHeroId(heroId);
   };
 
@@ -94,31 +96,34 @@ export default function HeroList() {
         <HeroDetails selectedHeroId={selectedHeroId} />
       ) : (
         <div className="grid grid-cols-6 lg:grid-cols-9 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
-          {heroes.slice().reverse().map((hero, index) => (
-            <motion.div
-              key={hero.heroid}
-              className="relative overflow-hidden h-auto rounded-lg hover:shadow-md hover:shadow-[#98FFFF]"
-              onClick={() => handleHeroClick(hero.heroid)}
-              initial={{ opacity: 0, y: 20 }} // Start with opacity 0 and position 20px lower
-              animate={{ opacity: 1, y: 0 }} // Animate to full opacity and normal position
-              transition={{
-                delay: index * 0.02, // Apply a delay based on the index of the hero (2 seconds gap)
-                duration: 0.3, // Duration of the animation
-                ease: "easeIn", // Ease-in animation
-              }}
-            >
-              <img
-                src={hero.key}
-                alt={hero.name}
-                height={170}
-                width={170}
-                className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-              <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#292E52] via-[#292E52]/70 to-transparent px-2 pb-1 pt-10 text-sm justify-center">
-                {hero.name}
-              </div>
-            </motion.div>
-          ))}
+          {heroes
+            .slice()
+            .reverse()
+            .map((hero, index) => (
+              <motion.div
+                key={hero.heroid}
+                className="relative overflow-hidden h-auto rounded-lg hover:shadow-md hover:shadow-[#98FFFF]"
+                onClick={() => handleHeroClick(hero.heroid)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.02,
+                  duration: 0.3,
+                  ease: "easeIn",
+                }}
+              >
+                <img
+                  src={hero.key}
+                  alt={hero.name}
+                  height={170}
+                  width={170}
+                  className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+                />
+                <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#292E52] via-[#292E52]/70 to-transparent px-2 pb-1 pt-10 text-sm justify-center">
+                  {hero.name}
+                </div>
+              </motion.div>
+            ))}
         </div>
       )}
     </section>

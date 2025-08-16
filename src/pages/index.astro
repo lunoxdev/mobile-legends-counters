@@ -6,16 +6,11 @@ import RotatePhone from "@components/RotatePhone.astro";
 
 <MainLayout>
   <div class="relative h-dvh w-screen flex flex-row">
-    <!-- Mensaje "Please rotate" -->
     <RotatePhone />
 
     <main
       class="flex-1 px-2 portrait:hidden md:portrait:flex landscape:flex md:landscape:block"
     >
-      <!-- <header>
-        <h1 class="text-xl font-bold">Hero List</h1>
-      </header> -->
-      <!-- Se puede agregar contenido principal aquí -->
       <HeroList client:load />
     </main>
   </div>
