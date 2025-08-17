@@ -79,7 +79,7 @@ export default function HeroList() {
 
   return (
     <section>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="bottom-center" reverseOrder={false} />
       <nav className="flex justify-between w-full shrink-0 p-2">
         <div>
           {roles.map((role) => (
