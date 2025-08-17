@@ -28,7 +28,7 @@ export default function HeroList() {
       toast(
         "Unfortunately, we don't manage the data, so it may not display sometimes.",
         {
-          duration: 2000,
+          duration: 5000,
           style: {
             borderRadius: "10px",
             background: "#383f6f",
