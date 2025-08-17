@@ -97,11 +97,13 @@ export default function HeroList() {
           ))}
         </div>
 
-        <input
-          placeholder="Search hero"
-          onChange={(e) => setSearchHero(e.target.value)}
-          className="p-2 bg-black/10 rounded-md outline-[#5C67B8]"
-        />
+        {!selectedHeroId && (
+          <input
+            placeholder="Search hero"
+            onChange={(e) => setSearchHero(e.target.value)}
+            className="p-2 bg-black/10 rounded-md outline-[#5C67B8]"
+          />
+        )}
       </nav>
 
       {/* Hero Details */}
