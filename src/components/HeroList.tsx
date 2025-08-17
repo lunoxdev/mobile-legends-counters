@@ -9,6 +9,7 @@ export default function HeroList() {
   const [selectedRoleId, setSelectedRoleId] = useState<string>("ALL");
   const [activeRoleId, setActiveRoleId] = useState<string>("ALL");
   const [selectedHeroId, setSelectedHeroId] = useState<string>(null);
+  const [searchHero, setSearchHero] = useState<string>("");
 
   const roles = [
     { id: "ALL", name: "ALL" },
@@ -72,31 +73,43 @@ export default function HeroList() {
     setSelectedHeroId(heroId);
   };
 
+  const handleSearchHero = heroes.filter((hero) =>
+    hero.name.toLowerCase().includes(searchHero)
+  );
+
   return (
     <section>
       <Toaster position="top-right" reverseOrder={false} />
-      <nav className="flex shrink-0">
-        {roles.map((role) => (
-          <button
-            key={role.id}
-            onClick={() => handleRoleClick(role.id)}
-            className={`px-5 py-3 border-b-[0.1px] outline-none border-[#7890B3] text-[#7890B3] hover:text-[#f2f2f2] hover:bg-gradient-to-t hover:from-[#5C67B8] hover:to-[#5C67B8]/5 ${
-              activeRoleId === role.id
-                ? "border-b-2 border-[#98FFFF] bg-gradient-to-t from-[#5C67B8] to-[#5C67B8]/5 text-[#f2f2f2]"
-                : ""
-            }`}
-          >
-            {role.name}
-          </button>
-        ))}
+      <nav className="flex justify-between w-full shrink-0 p-2">
+        <div>
+          {roles.map((role) => (
+            <button
+              key={role.id}
+              onClick={() => handleRoleClick(role.id)}
+              className={`px-5 py-3 border-b-[0.1px] outline-none border-[#7890B3] text-[#7890B3] hover:text-[#f2f2f2] hover:bg-gradient-to-t hover:from-[#5C67B8] hover:to-[#5C67B8]/5 ${
+                activeRoleId === role.id
+                  ? "border-b-2 border-[#98FFFF] bg-gradient-to-t from-[#5C67B8] to-[#5C67B8]/5 text-[#f2f2f2]"
+                  : ""
+              }`}
+            >
+              {role.name}
+            </button>
+          ))}
+        </div>
+
+        <input
+          placeholder="Search hero"
+          onChange={(e) => setSearchHero(e.target.value)}
+          className="p-2 bg-black/10 rounded-md outline-[#5C67B8]"
+        />
       </nav>
 
       {/* Hero Details */}
       {selectedHeroId ? (
         <HeroDetails selectedHeroId={selectedHeroId} />
       ) : (
-        <div className="grid grid-cols-6 lg:grid-cols-9 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
-          {heroes
+        <div className="grid grid-cols-9 lg:grid-cols-12 h-auto gap-3 pb-16 pt-4 pr-2 overflow-y-auto max-h-dvh">
+          {handleSearchHero
             .slice()
             .reverse()
             .map((hero, index) => (
