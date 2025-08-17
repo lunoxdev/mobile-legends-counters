@@ -26,7 +26,7 @@ export default function HeroList() {
       if (!selectedRoleId) return;
 
       toast(
-        "Unfortunately, we don't manage the data, so it may not display sometimes.",
+        "Hero data is provided by an external API and may not always be available.",
         {
           duration: 5000,
           style: {
